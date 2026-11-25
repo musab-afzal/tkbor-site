@@ -1,0 +1,15 @@
+# Database dumps - never commit
+/backups/
+*.sql
+
+# Windows junction to system/storage/app/public (recreate with `php artisan storage:link`)
+/storage
+
+# Archives / build leftovers
+*.zip
+
+# OS / editor
+Thumbs.db
+.DS_Store
+/.vscode
+/.idea

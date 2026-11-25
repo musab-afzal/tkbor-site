@@ -1,0 +1,17 @@
+    <script src="{{ asset('assets/vendors/jquery/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/bootstrap-select/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-appear/jquery.appear.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/owl-carousel/js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/aos/js/aos.js') }}"></script>
+<script src="{{ asset('assets/vendors/imagesloaded/imagesloaded.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/gsap/gsap.js') }}"></script>
+<script src="{{ asset('assets/vendors/gsap/scrolltrigger.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/gsap/splittext.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/gsap/ScrollSmoother.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/gsap/ScrollToPlugin.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/gsap/CustomEase.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/gsap/misiom-gsap.js') }}"></script>
+<script src="{{ asset('assets/vendors/three-js/three.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/hover-effect-js/hover-effect.umd.js') }}"></script>
+<script src="{{ versioned_asset('assets/js/misiom.js') }}"></script>

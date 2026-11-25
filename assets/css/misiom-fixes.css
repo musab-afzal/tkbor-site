@@ -1,0 +1,1140 @@
+/*
+ * Small, targeted mobile fixes on top of the theme's own stylesheet.
+ * Kept separate from misiom.css so the original template file stays untouched.
+ */
+
+/* "View all services"/"View All Plans" CTA below a capped mobile list. Hidden
+   on larger screens where the full grid/carousel already shows everything. */
+.services-two__mobile-more {
+    display: none;
+    text-align: center;
+    margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+
+    /* The "grid-reveal-anim" images (About, Work Process, etc.) start hidden
+       and only appear once a scroll-triggered animation runs; on mobile that
+       trigger is unreliable and can leave the image stuck half-assembled.
+       Skip the effect on mobile and just show the finished image. */
+    .grid-reveal-anim .grid-reveal-anim-img {
+        opacity: 1 !important;
+    }
+
+    .grid-reveal-anim .mask {
+        display: none !important;
+    }
+}
+
+/* Shared public-only polish. This stylesheet is never loaded by admin. */
+.skip-link { position: fixed; top: 8px; left: 8px; transform: translateY(-160%); z-index: 10000; padding: 12px 18px; background: #fff; color: #18191c; }
+.skip-link:focus { transform: none; }
+:where(a, button, input, select, textarea):focus-visible { outline: 2px solid var(--misiom-base, #ffa501); outline-offset: 4px; }
+.mobile-search-link { display: none; }
+button.mobile-nav__btn, button.sidebar-btn__toggler, button.mobile-nav__close, button.sidebar-two__close { border: 0; background: transparent; color: inherit; }
+button.mobile-nav__btn { justify-content: center; padding: 8px; }
+button.sidebar-btn__toggler { padding: 0; }
+button.mobile-nav__close, button.sidebar-two__close { color: #fff; width: 44px; height: 44px; align-items: center; justify-content: center; }
+.mobile-nav__content, .sidebar-two__content { max-width: 100%; overscroll-behavior: contain; }
+.mobile-nav__content .main-menu__list li { position: relative; }
+.mobile-nav__content .main-menu__list li > a { height: auto; min-height: 46px; overflow-wrap: anywhere; padding-right: 48px; }
+.mobile-dropdown-toggle { position: absolute; right: 0; top: 0; width: 44px; height: 46px; border: 0; color: #fff; background: transparent; }
+.mobile-dropdown-toggle[aria-expanded="true"] { color: var(--misiom-base, #ffa501); }
+.main-menu__list li:focus-within > ul { opacity: 1; visibility: visible; transform: translateY(0); }
+.form-one__control, .row > *, .main-header__left { min-width: 0; }
+.form-one input:not([type="checkbox"]):not([type="radio"]), .form-one select, .form-one textarea { max-width: 100%; min-height: 44px; }
+.form-feedback { overflow-wrap: anywhere; }
+.form-feedback[role="status"] { color: #86efac !important; }
+.form-feedback[role="alert"] { color: #fca5a5 !important; }
+button[disabled] { cursor: wait; opacity: .65; }
+.blog-details__text, .service-details__text, .portfolio-details__text, .footer-widget__info, .mobile-nav__contact, .contact-two__info__text { overflow-wrap: anywhere; }
+#smooth-content img { max-width: 100%; }
+#smooth-content iframe { max-width: 100%; }
+#smooth-content table { display: block; max-width: 100%; overflow-x: auto; }
+#smooth-content pre { max-width: 100%; overflow-x: auto; }
+.misiom-breadcrumb { flex-wrap: wrap; }
+.owl-nav button, .owl-dots button { min-width: 44px; min-height: 44px; }
+@media (max-width: 1399px) {
+    .main-header__nav { display: none; }
+    .main-header__left { width: auto; flex: 1 1 auto; }
+    .main-header__right { display: flex; flex: 0 0 auto; gap: 8px; padding: 6px 10px; }
+    .main-header__inner { gap: 12px; }
+    .main-header__logo { margin-right: 0; }
+    .mobile-nav__btn { display: flex; width: 44px; height: 44px; flex-shrink: 0; }
+    .main-header .sidebar-btn__toggler { margin-left: 12px; }
+    .main-header .sidebar-btn__toggler::before { display: none; }
+}
+@media (max-width: 767px) {
+    .main-header { top: 16px; }
+    .main-header__logo img { width: clamp(110px, 32vw, 160px); }
+    .main-header .sidebar-btn__toggler { display: none; }
+    .mobile-search-link { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; color: #fff; }
+    .page-header__title { font-size: clamp(30px, 8vw, 52px); overflow-wrap: anywhere; }
+    .sec-title__title { font-size: clamp(28px, 7vw, 42px); overflow-wrap: anywhere; }
+    .section-space { padding-top: 60px; padding-bottom: 60px; }
+    .form-one input, .form-one select, .form-one textarea, .footer-widget__newsletter__input { font-size: 16px; }
+    .misiom-btn { white-space: normal; text-align: center; }
+    .main-footer__copyright { overflow-wrap: anywhere; }
+    .main-footer__bottom__inner { flex-wrap: wrap; gap: 16px; }
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+    .custom-cursor__cursor, .custom-cursor__cursor-two { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    [data-aos] { opacity: 1 !important; transform: none !important; }
+}
+
+.post-pagination { flex-wrap: wrap; gap: 8px; }
+.post-pagination a, .post-pagination > span { min-width: 44px; min-height: 44px; }
+
+/* ==========================================================================
+   Mobile Sticky Header Gap Fix
+   ========================================================================== */
+@media (max-width: 767px) {
+    .main-header.sticky-header--cloned {
+        top: 0 !important;
+        margin-top: 0 !important;
+    }
+    .sticky-header--cloned.active {
+        top: 0 !important;
+    }
+}
+
+/* ==========================================================================
+   Work Process Step Numbering Fix (removes duplicate CSS counter)
+   ========================================================================== */
+.work-process-two__item__step::before {
+    content: none !important;
+}
+
+/* ==========================================================================
+   Services Section (Homepage) - Stabilized 4-Card Dark Design
+   ========================================================================== */
+.services-two--dark .services-two__wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 30px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    align-items: stretch !important;
+}
+
+@media (max-width: 1199px) {
+    .services-two--dark .services-two__wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 30px 24px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .services-two--dark .services-two__wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+}
+
+/* Base Card: Same dark theme, border radius, and colors as the original design */
+.services-two--dark .service-card-two {
+    width: 100% !important;
+    height: 100% !important;
+    flex: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    border-radius: 20px !important;
+    background-color: var(--misiom-black, #18191c) !important;
+    border: 1px solid var(--misiom-black5, #2d2f32) !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+    margin: 0 !important;
+}
+
+/* Hover: Smooth, safe lift without modifying width, height, padding, or margins */
+.services-two--dark .service-card-two:hover {
+    transform: translateY(-6px) !important;
+    border-color: var(--misiom-base, #ffa501) !important;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* Card Content: Stays stable, no jumping */
+.services-two--dark .service-card-two .service-card-two__content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    padding: 55px 28px 28px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 2 !important;
+    transition: none !important;
+}
+
+/* Override any theme rule that adds 300px padding-right on active/hover */
+.services-two--dark .service-card-two.active .service-card-two__content,
+.services-two--dark .service-card-two:hover .service-card-two__content {
+    padding: 55px 28px 28px !important;
+}
+
+/* Number Badge: Fixed position on top border, turns gold on hover */
+.services-two--dark .service-card-two__number {
+    width: 58px !important;
+    height: 58px !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    position: absolute !important;
+    top: -29px !important;
+    left: 28px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--misiom-black5, #2d2f32) !important;
+    color: var(--misiom-white, #ffffff) !important;
+    transition: background-color 0.3s ease !important;
+    z-index: 5 !important;
+}
+
+.services-two--dark .service-card-two:hover .service-card-two__number,
+.services-two--dark .service-card-two.active .service-card-two__number {
+    background-color: var(--misiom-base, #ffa501) !important;
+}
+
+/* Icon Object */
+.services-two--dark .service-card-two__object {
+    width: 46px !important;
+    height: 46px !important;
+    object-fit: contain !important;
+    margin-bottom: 22px !important;
+    transition: transform 0.3s ease !important;
+    filter: none !important;
+}
+
+.services-two--dark .service-card-two:hover .service-card-two__object {
+    transform: scale(1.08) !important;
+}
+
+/* Title */
+.services-two--dark .service-card-two__title {
+    font-size: 19px !important;
+    line-height: 1.35 !important;
+    font-weight: 700 !important;
+    color: var(--misiom-white, #ffffff) !important;
+    margin-bottom: 16px !important;
+    padding-bottom: 15px !important;
+    border-bottom: 1px solid var(--misiom-black5, #2d2f32) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.services-two--dark .service-card-two__title a {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease !important;
+}
+
+.services-two--dark .service-card-two__title a:hover {
+    color: var(--misiom-base, #ffa501) !important;
+}
+
+/* Feature/Bullet List */
+.services-two--dark .service-card-two__list {
+    margin-bottom: 24px !important;
+    padding-left: 0 !important;
+    list-style: none !important;
+}
+
+.services-two--dark .service-card-two__list li {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    color: var(--misiom-gray, #75767a) !important;
+    margin-bottom: 7px !important;
+    position: relative !important;
+    padding-left: 15px !important;
+}
+
+.services-two--dark .service-card-two__list li::before {
+    content: "" !important;
+    width: 5px !important;
+    height: 5px !important;
+    border-radius: 50% !important;
+    background-color: var(--misiom-base, #ffa501) !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 8px !important;
+}
+
+/* Read More Button: Stays pinned to bottom, never breaks into two lines */
+.services-two--dark .misiom-btn-two {
+    margin-top: auto !important;
+    align-self: flex-start !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 5px 52px 5px 20px !important;
+    border-radius: 100px !important;
+    border: 1px solid var(--misiom-black5, #2d2f32) !important;
+    background-color: transparent !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    text-decoration: none !important;
+    position: relative !important;
+    transition: all 0.3s ease !important;
+}
+
+.services-two--dark .misiom-btn-two__text {
+    white-space: nowrap !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--misiom-gray, #75767a) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: color 0.3s ease !important;
+    display: inline-block !important;
+}
+
+.services-two--dark .misiom-btn-two__icon-box {
+    width: 36px !important;
+    height: 36px !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: -1px !important;
+    transform: translateY(-50%) !important;
+    border-radius: 50% !important;
+    background-color: var(--misiom-black5, #2d2f32) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+}
+
+.services-two--dark .misiom-btn-two__icon {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: static !important;
+}
+
+.services-two--dark .misiom-btn-two__icon span {
+    color: var(--misiom-gray, #75767a) !important;
+    font-size: 14px !important;
+    transition: color 0.3s ease !important;
+}
+
+.services-two--dark .service-card-two:hover .misiom-btn-two,
+.services-two--dark .misiom-btn-two:hover {
+    border-color: var(--misiom-base, #ffa501) !important;
+}
+
+.services-two--dark .service-card-two:hover .misiom-btn-two__text,
+.services-two--dark .misiom-btn-two:hover .misiom-btn-two__text {
+    color: var(--misiom-white, #ffffff) !important;
+}
+
+.services-two--dark .service-card-two:hover .misiom-btn-two__icon-box,
+.services-two--dark .misiom-btn-two:hover .misiom-btn-two__icon-box {
+    background-color: var(--misiom-base, #ffa501) !important;
+}
+
+.services-two--dark .service-card-two:hover .misiom-btn-two__icon span,
+.services-two--dark .misiom-btn-two:hover .misiom-btn-two__icon span {
+    color: var(--misiom-black, #18191c) !important;
+}
+
+/* Hide the intrusive accordion image on hover to prevent layout jumps */
+.services-two--dark .service-card-two__image {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Text-Focused Testimonial Cards (No Profile Photos)
+   ========================================================================== */
+.testimonials-two__card__top--no-image {
+    grid-template-columns: 1fr !important;
+    padding: 60px 60px 40px !important;
+}
+
+@media (max-width: 767px) {
+    .testimonials-two__card__top--no-image {
+        padding: 35px 25px 25px !important;
+    }
+}
+
+.testimonials-two__card__project {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--misiom-black, #18191c) !important;
+    margin-bottom: 4px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.testimonials-one__card--no-image .testimonials-one__card__info--no-image {
+    display: block !important;
+    padding-left: 0 !important;
+}
+
+.testimonials-one__card__project {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: var(--misiom-base, #ffa501) !important;
+    margin-bottom: 4px !important;
+    text-transform: uppercase !important;
+}
+
+/* ==========================================================================
+   Navigation Dropdown Polish
+   ========================================================================== */
+.main-menu__list > li.dropdown > ul {
+    min-width: 240px;
+}
+.main-menu__list > li.dropdown > ul > li > a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+
+/* ==========================================================================
+   Breadcrumb Color & Contrast Fix (Ensures 100% white text on dark headers)
+   ========================================================================== */
+.misiom-breadcrumb,
+.misiom-breadcrumb li,
+.misiom-breadcrumb li a,
+.misiom-breadcrumb li span,
+.misiom-breadcrumb li:not(:first-child) span {
+    color: #ffffff !important;
+}
+
+.misiom-breadcrumb li a:hover {
+    color: var(--misiom-base, #ffa501) !important;
+}
+
+.misiom-breadcrumb li:not(:last-child)::after {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* ==========================================================================
+   Redesigned Premium 4-Column Software Company Footer
+   ========================================================================== */
+.main-footer {
+    padding-top: 70px;
+    background-color: var(--misiom-black, #18191c);
+    position: relative;
+    overflow: hidden;
+}
+
+.main-footer .main-footer__widget {
+    padding-top: 0;
+    padding-bottom: 50px;
+}
+
+.footer-widget__logo {
+    display: inline-flex;
+    margin-bottom: 20px;
+}
+
+.footer-widget__logo-text {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--misiom-white, #ffffff);
+    letter-spacing: 1.5px;
+}
+
+.footer-widget--about .footer-widget__text {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: #9ca3af;
+    margin-bottom: 22px;
+    font-weight: 400;
+}
+
+.footer-widget .social-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.footer-widget .social-links a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #23252a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.footer-widget .social-links a:hover {
+    background-color: var(--misiom-base, #ffa501);
+    transform: translateY(-3px);
+}
+
+.footer-widget .social-links a .social-links__icon {
+    font-size: 15px;
+    color: #ffffff;
+}
+
+.footer-widget__title {
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--misiom-white, #ffffff);
+    margin-bottom: 22px;
+    position: relative;
+    padding-bottom: 12px;
+    text-transform: capitalize;
+}
+
+.footer-widget__title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 32px;
+    height: 2px;
+    background-color: var(--misiom-base, #ffa501);
+    border-radius: 2px;
+}
+
+.footer-widget--links .footer-widget__links li {
+    margin-bottom: 10px;
+}
+
+.footer-widget--links .footer-widget__links li a {
+    font-size: 14.5px;
+    color: #9ca3af;
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 2px 0;
+}
+
+.footer-widget--links .footer-widget__links li a:hover {
+    color: var(--misiom-base, #ffa501);
+    transform: translateX(4px);
+}
+
+.footer-widget--contact .footer-widget__info li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    font-size: 14.5px;
+    color: #9ca3af;
+    line-height: 1.55;
+}
+
+.footer-widget--contact .footer-widget__info__icon {
+    color: var(--misiom-base, #ffa501);
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+.footer-widget--contact a {
+    color: #9ca3af;
+    transition: color 0.3s ease;
+}
+
+.footer-widget--contact a:hover {
+    color: var(--misiom-base, #ffa501);
+}
+
+.footer-widget--contact .footer-widget__address {
+    font-style: normal;
+    line-height: 1.6;
+    margin: 0;
+    color: #9ca3af;
+}
+
+.footer-widget__blog-list {
+    margin: 0;
+    padding: 0;
+}
+
+.footer-widget__blog-item {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.footer-widget__blog-item:last-child {
+    margin-bottom: 0;
+}
+
+.footer-widget__blog-thumb {
+    flex-shrink: 0;
+    width: 65px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    display: block;
+    background: #23252a;
+}
+
+.footer-widget__blog-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.footer-widget__blog-thumb:hover img {
+    transform: scale(1.08);
+}
+
+.footer-widget__blog-content {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.footer-widget__blog-date {
+    font-size: 12px;
+    color: var(--misiom-base, #ffa501);
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 500;
+}
+
+.footer-widget__blog-title {
+    font-size: 13.5px;
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 600;
+}
+
+.footer-widget__blog-title a {
+    color: #e5e7eb;
+    transition: color 0.3s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.footer-widget__blog-title a:hover {
+    color: var(--misiom-base, #ffa501);
+}
+
+.footer-widget__no-blogs {
+    color: #9ca3af;
+    font-size: 14px;
+}
+
+.main-footer__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 22px 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.main-footer__bottom__inner {
+    padding: 0 !important;
+    border-top: none !important;
+    text-align: center;
+}
+
+.main-footer__copyright {
+    font-size: 14.5px;
+    color: #9ca3af;
+    margin: 0;
+}
+
+@media (max-width: 767px) {
+    .main-footer {
+        padding-top: 50px;
+    }
+    .main-footer .main-footer__widget {
+        padding-bottom: 35px;
+    }
+    .footer-widget__title {
+        margin-bottom: 16px;
+    }
+    .footer-widget--about .footer-widget__text {
+        font-size: 14px;
+    }
+}
+
+/* ==========================================================================
+   Services Page - 3 Cards Per Row Grid
+   ========================================================================== */
+.services-page .services-two__wrapper {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 65px 30px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    align-items: stretch !important;
+}
+
+@media (max-width: 1199px) {
+    .services-page .services-two__wrapper {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 60px 24px !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .services-page .services-two__wrapper {
+        grid-template-columns: 1fr !important;
+        gap: 55px !important;
+    }
+}
+
+/* Base Card: Light theme matching original services page design */
+.services-page .service-card-two {
+    width: 100% !important;
+    height: 100% !important;
+    flex: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    border-radius: 20px !important;
+    background-color: var(--misiom-white, #ffffff) !important;
+    border: 1px solid var(--misiom-border-color, #e1e2e7) !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+    margin: 0 !important;
+}
+
+/* Hover: Smooth, safe lift without changing dimensions or disturbing neighboring cards */
+.services-page .service-card-two:hover {
+    transform: translateY(-6px) !important;
+    border-color: var(--misiom-base, #ffa501) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Card Content: Equal height, flex column */
+.services-page .service-card-two .service-card-two__content {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto !important;
+    height: 100% !important;
+    padding: 55px 35px 35px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    z-index: 2 !important;
+    transition: none !important;
+}
+
+@media (max-width: 575px) {
+    .services-page .service-card-two .service-card-two__content {
+        padding: 50px 25px 25px !important;
+    }
+}
+
+/* Prevent the theme's 300px padding shift on active/hover */
+.services-page .service-card-two.active .service-card-two__content,
+.services-page .service-card-two:hover .service-card-two__content {
+    padding: 55px 35px 35px !important;
+}
+@media (max-width: 575px) {
+    .services-page .service-card-two.active .service-card-two__content,
+    .services-page .service-card-two:hover .service-card-two__content {
+        padding: 50px 25px 25px !important;
+    }
+}
+
+/* Number Badge: Fixed position on top border, turns gold on hover */
+.services-page .service-card-two__number {
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    position: absolute !important;
+    top: -30px !important;
+    left: 35px !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--misiom-border-color, #e1e2e7) !important;
+    color: var(--misiom-white, #ffffff) !important;
+    transition: background-color 0.3s ease !important;
+    z-index: 5 !important;
+}
+
+.services-page .service-card-two:hover .service-card-two__number,
+.services-page .service-card-two.active .service-card-two__number {
+    background-color: var(--misiom-base, #ffa501) !important;
+}
+
+/* Icon Object */
+.services-page .service-card-two__object {
+    width: 48px !important;
+    height: 48px !important;
+    object-fit: contain !important;
+    margin-bottom: 24px !important;
+    transition: transform 0.3s ease !important;
+    filter: none !important;
+}
+
+.services-page .service-card-two:hover .service-card-two__object {
+    transform: scale(1.08) !important;
+}
+
+/* Title */
+.services-page .service-card-two__title {
+    font-size: 21px !important;
+    line-height: 1.35 !important;
+    font-weight: 700 !important;
+    color: var(--misiom-black, #18191c) !important;
+    margin-bottom: 18px !important;
+    padding-bottom: 18px !important;
+    border-bottom: 1px solid var(--misiom-border-color, #e1e2e7) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+
+.services-page .service-card-two__title a {
+    color: inherit !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease !important;
+}
+
+.services-page .service-card-two__title a:hover {
+    color: var(--misiom-base, #ffa501) !important;
+}
+
+/* Feature/Bullet List */
+.services-page .service-card-two__list {
+    margin-bottom: 25px !important;
+    padding-left: 0 !important;
+    list-style: none !important;
+}
+
+.services-page .service-card-two__list li {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    color: var(--misiom-text, #797b81) !important;
+    margin-bottom: 8px !important;
+    position: relative !important;
+    padding-left: 16px !important;
+}
+
+.services-page .service-card-two__list li::before {
+    content: "" !important;
+    width: 5px !important;
+    height: 5px !important;
+    border-radius: 50% !important;
+    background-color: var(--misiom-base, #ffa501) !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 8px !important;
+}
+
+/* Read More Button: Stays pinned to bottom, never breaks into two lines */
+/* Service Page Read More Button: clean, modern, premium, stable, never breaks into two lines */
+.services-page .misiom-btn-two,
+.services-page .service-card-two .misiom-btn-two {
+    margin-top: auto !important;
+    align-self: flex-start !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 5px 54px 5px 22px !important;
+    border-radius: 100px !important;
+    border: 1px solid var(--misiom-border-color, #e1e2e7) !important;
+    background-color: var(--misiom-white, #ffffff) !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+    text-decoration: none !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.services-page .misiom-btn-two__text,
+.services-page .service-card-two .misiom-btn-two__text {
+    white-space: nowrap !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    color: var(--misiom-black, #18191c) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    transition: color 0.3s ease !important;
+    display: inline-block !important;
+}
+
+.services-page .misiom-btn-two__icon-box,
+.services-page .service-card-two .misiom-btn-two__icon-box {
+    width: 36px !important;
+    height: 36px !important;
+    position: absolute !important;
+    top: 50% !important;
+    right: -1px !important;
+    transform: translateY(-50%) !important;
+    border-radius: 50% !important;
+    background-color: var(--misiom-white2, #f1f3f5) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.services-page .misiom-btn-two__icon,
+.services-page .service-card-two .misiom-btn-two__icon {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: static !important;
+}
+
+.services-page .misiom-btn-two__icon span,
+.services-page .service-card-two .misiom-btn-two__icon span,
+.services-page .misiom-btn-two__icon i,
+.services-page .service-card-two .misiom-btn-two__icon i {
+    color: var(--misiom-base, #ffa501) !important;
+    font-size: 14px !important;
+    transition: color 0.3s ease !important;
+}
+
+/* Card hover: button stays white with orange border, text & icon-box turn orange, icon is white */
+.services-page .service-card-two:hover .misiom-btn-two {
+    background-color: var(--misiom-white, #ffffff) !important;
+    border-color: var(--misiom-base, #ffa501) !important;
+}
+
+.services-page .service-card-two:hover .misiom-btn-two__text {
+    color: var(--misiom-base, #ffa501) !important;
+}
+
+.services-page .service-card-two:hover .misiom-btn-two__icon-box {
+    background-color: var(--misiom-base, #ffa501) !important;
+}
+
+.services-page .service-card-two:hover .misiom-btn-two__icon span,
+.services-page .service-card-two:hover .misiom-btn-two__icon i {
+    color: var(--misiom-white, #ffffff) !important;
+}
+
+/* Direct button hover: button turns solid orange with crisp dark text, dark icon-box, white icon */
+.services-page .misiom-btn-two:hover {
+    background-color: var(--misiom-base, #ffa501) !important;
+    border-color: var(--misiom-base, #ffa501) !important;
+}
+
+.services-page .misiom-btn-two:hover .misiom-btn-two__text {
+    color: var(--misiom-black, #18191c) !important;
+}
+
+.services-page .misiom-btn-two:hover .misiom-btn-two__icon-box {
+    background-color: var(--misiom-black, #18191c) !important;
+}
+
+.services-page .misiom-btn-two:hover .misiom-btn-two__icon span,
+.services-page .misiom-btn-two:hover .misiom-btn-two__icon i {
+    color: var(--misiom-white, #ffffff) !important;
+}
+
+/* Hide the intrusive accordion image on hover to prevent layout jumps */
+.services-page .service-card-two__image {
+    display: none !important;
+}
+
+
+
+/* ==========================================================================
+   TEAM MEMBER IMAGE SIZING & CARD ALIGNMENT
+   ========================================================================== */
+.team-card {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.team-card__image {
+    width: 100% !important;
+    aspect-ratio: 370 / 560 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    border-radius: 20px !important;
+    background-color: var(--misiom-black, #18191c) !important;
+}
+
+.team-card__image img,
+.team-card__image .grid-reveal-anim-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+    border-radius: inherit !important;
+}
+
+.team-card__content {
+    width: 100% !important;
+    position: absolute !important;
+    left: 0px !important;
+    bottom: 0px !important;
+    z-index: 1 !important;
+}
+
+.team-one .row > [class*="col-"],
+.team-two__carousel .owl-item {
+    display: flex !important;
+}
+
+.team-one .row > [class*="col-"] > .team-card,
+.team-two__carousel .owl-item .team-card {
+    flex: 1 1 100% !important;
+}
+
+/* ==========================================================================
+   DYNAMIC IMAGE VISIBILITY & CONTAINER SIZING (PORTABLE FIX)
+   ========================================================================== */
+
+/* Ensure grid-reveal-anim images are always visible on all screen sizes */
+.grid-reveal-anim .grid-reveal-anim-img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+/* Portfolio Card image container: guaranteed aspect ratio & dimensions */
+.portfolio-two__card__image {
+    width: 100% !important;
+    aspect-ratio: 16 / 9 !important;
+    min-height: 340px !important;
+    display: block !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 20px !important;
+}
+
+.portfolio-two__card__image img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+    border-radius: inherit !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+@media (max-width: 1199px) {
+    .portfolio-two__card__image {
+        min-height: 280px !important;
+        margin-bottom: 20px !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .portfolio-two__card__image {
+        min-height: 220px !important;
+    }
+}
+
+/* WebGL hover image container & canvas overlay */
+.bw-hover-img {
+    display: block !important;
+    position: relative !important;
+}
+
+.bw-hover-img img {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.bw-hover-img canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: inherit !important;
+    z-index: 2 !important;
+    pointer-events: none !important;
+}
+
+/* Service Details Image */
+.service-details__image {
+    width: 100% !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    margin-bottom: 35px !important;
+    display: block !important;
+}
+
+.service-details__image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: inherit !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Portfolio Details Image */
+.portfolio-details__image {
+    width: 100% !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    margin-bottom: 30px !important;
+    display: block !important;
+}
+
+.portfolio-details__image img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: inherit !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Blog Card Image */
+.blog-card__image {
+    width: 100% !important;
+    aspect-ratio: 370 / 260 !important;
+    overflow: hidden !important;
+    position: relative !important;
+    display: block !important;
+    border-radius: 20px !important;
+}
+
+.blog-card__image img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+    border-radius: inherit !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Blog Details Image Box */
+.blog-details__image__box {
+    width: 100% !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    display: block !important;
+}
+
+.blog-details__image__box img {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    border-radius: inherit !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /system/
+
+Sitemap: https://tkbor.com/sitemap.xml
